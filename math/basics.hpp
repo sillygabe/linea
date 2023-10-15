@@ -11,5 +11,4 @@ namespace math
         return result;
     }
 
-    double sin(double n);
 } 
