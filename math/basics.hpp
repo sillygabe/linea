@@ -1,5 +1,3 @@
-#include <cmath>
-
 namespace math
 {   
     //Returns the factorial of a number
