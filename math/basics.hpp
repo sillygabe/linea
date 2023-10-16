@@ -1,3 +1,5 @@
+#include <cmath>
+
 namespace math
 {   
     //Returns the factorial of a number
@@ -28,5 +30,17 @@ namespace math
     {
         return toPower(number, 2);
     } 
+
+    //Transforms degrees into radians
+    double toRadians(double degrees) 
+    {
+        return degrees * M_PI / 180;
+    }
+
+    //Transforms radians into degrees
+    double toDegrees(double radians) 
+    {
+        return radians / M_PI * 180;
+    }
 
 } 
