@@ -12,3 +12,5 @@ For, example `fctr` returns the factorial of the number;
 fctr(5);
 ```
 This example returns 120.
+
+Note: the math module also includes the standard <cmath> for sin and cos.

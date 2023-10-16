@@ -1,3 +1,5 @@
+#include <cmath>
+
 namespace math
 {   
     //Returns the factorial of a number
@@ -28,5 +30,5 @@ namespace math
     {
         return toPower(number, 2);
     } 
-    
+
 } 
