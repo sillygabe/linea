@@ -6,7 +6,7 @@ namespace math
     {
         if (number < 1) return -1;
         long long result = 1;
-        for (int i = 0; i < number; i++) {
+        for (int i = 1; i < number + 1; i++) {
             result *= i;
         }
         return result;
