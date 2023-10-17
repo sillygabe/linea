@@ -1,5 +1,4 @@
 #include <cmath>
-#include "basics.hpp"
 
 namespace math {
     class Point2D 
@@ -32,18 +31,32 @@ namespace math {
 
             double get_length()
             {
-                return sqrt(sqr(this->x) + sqr(this->y));
+                return sqrt(this->x * this->x + this->y * this->y);
+            }
+
+            Vector2D operator+(Vector2D val) 
+            {
+                return Vector2D
+                (
+                    this->x + val.x,
+                    this->y + val.y
+                );
+            }
+
+            void operator+=(Vector2D val) 
+            {
+                this->x += val.x;
+                this->y += val.y;
             }
 
         static Vector2D from_polar(float length, float degrees) 
         {
-            double radians = toRadians(degrees);
-            return Vector2D(
+            double radians = degrees / 180 * 3.14;
+            return Vector2D
+            (
                 sin(radians) * length,
                 cos(radians) * length
             );
         }
     };
-
-    
 }
