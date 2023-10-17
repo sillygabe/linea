@@ -4,9 +4,9 @@ namespace math {
     class Point2D 
     {
         public: 
-            int x;
-            int y;
-            Point2D(int x, int y) {
+            double x;
+            double y;
+            Point2D(double x, double y) {
                 this->x = x;
                 this->y = y;
             }
@@ -15,15 +15,15 @@ namespace math {
     class Vector2D 
     {
         private:
-            int x; 
-            int y;
+            double x; 
+            double y;
             double length;
         public:
             Point2D get_point() {
                 return Point2D(this->x, this->y);
             }
 
-            Vector2D(int x, int y) {
+            Vector2D(double x, double y) {
                 this->x = x;
                 this->y = y;
                 this->length = this->get_length();
