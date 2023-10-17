@@ -55,7 +55,7 @@ namespace math {
                 this->y += val.y;
             }
 
-        static Vector2D from_polar(float length, float degrees) 
+        static Vector2D from_polar(double length, double degrees) 
         {
             double radians = degrees / 180 * 3.14;
             return Vector2D
