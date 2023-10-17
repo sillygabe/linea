@@ -43,6 +43,12 @@ namespace math {
                 );
             }
 
+            void invert() 
+            {
+                this->x *= -1;
+                this->y *= -1;  
+            }
+
             void operator+=(Vector2D val) 
             {
                 this->x += val.x;
