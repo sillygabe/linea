@@ -6,11 +6,4 @@ The library has many modules which you can also use independently
 
 # Math
 
-The math module includes many functions and classes for operations to make your games.
-For, example `fctr` returns the factorial of the number;
-```
-fctr(5);
-```
-This example returns 120.
-
-Note: the math module also includes the standard \<cmath> for sin and cos.
+The math module includes many useful functions and classes. For example: Vector2D
