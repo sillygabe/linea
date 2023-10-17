@@ -1,3 +1,4 @@
 .vscode
 tests.cpp
 main
+.DS_Store
