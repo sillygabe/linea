@@ -28,7 +28,7 @@ namespace math
     //Returns the number squared
     long long sqr(int number) 
     {
-        return toPower(number, 2);
+        return number * number;
     } 
 
     //Transforms degrees into radians
