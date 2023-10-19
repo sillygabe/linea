@@ -1,6 +1,7 @@
 #include <cmath>
 
-namespace math {
+namespace math 
+{
     class Point2D 
     {
         public: 
