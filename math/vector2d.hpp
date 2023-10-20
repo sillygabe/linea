@@ -44,10 +44,25 @@ namespace math
                 );
             }
 
+            Vector2D operator-(Vector2D val) 
+            {
+                return Vector2D
+                (
+                    this->x - val.x,
+                    this->y - val.y
+                );
+            }
+
             void operator+=(Vector2D val) 
             {
                 this->x += val.x;
                 this->y += val.y;
+            }
+
+            void operator-=(Vector2D val) 
+            {
+                this->x -= val.x;
+                this->y -= val.y;
             }
 
             void invert() 
