@@ -1,3 +1,5 @@
+#include <cmath>
+
 namespace math 
 {
     class Point3D 
@@ -77,6 +79,23 @@ namespace math
                 this->x -= val.x;
                 this->y -= val.y;
                 this->z -= val.z;
+            }
+
+            static Vector3D from_polar(
+                double length,
+                double degreesPan,
+                double degreesTilt
+            )
+            {
+                double radiansPan, radiansTilt;
+                radiansPan = degreesPan * M_PI / 180; 
+                radiansTilt = degreesTilt * M_PI / 180;
+
+                return Vector3D (
+                    length * sin(radiansPan) * cos(radiansTilt),
+                    length * cos(radiansPan) * sin(radiansTilt),
+                    length * cos(radiansTilt)
+                );
             }
     };
 }
