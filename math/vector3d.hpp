@@ -98,4 +98,4 @@ namespace math
                 );
             }
     };
-}
+} //Lorem ipsum
