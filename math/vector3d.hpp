@@ -62,9 +62,12 @@ namespace math
 
             Vector3D operator-(Vector3D val)
             {
-                this->x -= val.x;
-                this->y -= val.y;
-                this->z -= val.z;
+                return Vector3D
+                (
+                    this->x - val.x,
+                    this->y - val.y,
+                    this->z - val.z
+                );
             }
 
             void operator+=(Vector3D val)
