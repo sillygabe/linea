@@ -12,7 +12,7 @@ namespace disp
                 int height
             )
             {
-                this->surf = SDL_CreateRGBSurface
+                this->surf = SDL_CreateRGBSurface 
                 (
                     SDL_SWSURFACE,
                     width,
@@ -31,12 +31,17 @@ namespace disp
                     this->surf,
                     NULL,
                     SDL_MapRGB(
-                        this->surf->format,
+                        this->getSurface()->format,
                         r,
                         g,
                         b
                     )
                 );
+            }
+
+            SDL_Surface* getSurface()
+            {
+                return this->surf;
             }
     };
 }

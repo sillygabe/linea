@@ -1,7 +1,7 @@
 #include "math/math.hpp"
 #include "display/display.hpp"
 
-void LineaInit()
+int LineaInit()
 {
-    SDL_Init(SDL_INIT_EVERYTHING);
+    return SDL_Init(SDL_INIT_EVERYTHING);
 }
