@@ -3,8 +3,7 @@
 This is a C++ library built on top of [SDL](https://github.com/libsdl-org/SDL) to work with simple 3D Graphics.
 This library is supposed to have linear learning curve (hence the name), so that you don't go insane from having to learn 1000 different modules and plugins with next to zero documentation.
 
-To start working, download the latest release of Linea and SDL and write `#include <Linea>`
-in your C++ file.
+To start working, download the latest release of Linea and SDL and write `#include <Linea>` in your C++ file.
 
 PS: don't use `<iostream>` for input/output, it completely breaks SDL, instead use `<stdio.h>`.
 
