@@ -33,7 +33,7 @@ namespace math
                 this->z = z;
             }
 
-            Point3D get_point() 
+            Point3D getPoint() 
             {
                 return Point3D
                 (
@@ -84,7 +84,7 @@ namespace math
                 this->z -= val.z;
             }
 
-            static Vector3D from_polar(
+            static Vector3D fromPolar(
                 double length,
                 double degreesPan,
                 double degreesTilt

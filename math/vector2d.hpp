@@ -20,17 +20,17 @@ namespace math
             double y;
             double length;
         public:
-            Point2D get_point() {
+            Point2D getPoint() {
                 return Point2D(this->x, this->y);
             }
 
             Vector2D(double x, double y) {
                 this->x = x;
                 this->y = y;
-                this->length = this->get_length();
+                this->length = this->getLength();
             }
 
-            double get_length()
+            double getLength()
             {
                 return sqrt(this->x * this->x + this->y * this->y);
             }
@@ -71,9 +71,9 @@ namespace math
                 this->y *= -1;  
             }
 
-        static Vector2D from_polar(double length, double degrees) 
+        static Vector2D fromPolar(double length, double degrees) 
         {
-            double radians = degrees / 180 * 3.14;
+            double radians = degrees / 180 * M_PI;
             return Vector2D
             (
                 sin(radians) * length,
