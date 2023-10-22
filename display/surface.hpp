@@ -1,11 +1,12 @@
 #include <SDL2/SDL.h>
+#include <SDL2_image/SDL_image.h>
 
 namespace disp
 {
     class LineaSurface
     {
         private:
-            SDL_Surface* surf = NULL;
+            SDL_Surface* surf = nullptr;
         public:
             LineaSurface(
                 int width,
@@ -14,24 +15,29 @@ namespace disp
             {
                 this->surf = SDL_CreateRGBSurface 
                 (
-                    SDL_SWSURFACE,
+                    0,
                     width,
                     height,
-                    16,
-                    0x000000FF,
-                    0x0000FF00,
+                    1,
+                    0xFF000000,
                     0x00FF0000,
-                    0xFF000000
+                    0x0000FF00,
+                    0x000000FF
                 );
+            }
+
+            LineaSurface(SDL_Surface* surf)
+            {
+                this->surf = surf;
             }
 
             void fill(int r, int g, int b)
             {
                 SDL_FillRect(
                     this->surf,
-                    NULL,
+                    nullptr,
                     SDL_MapRGB(
-                        this->getSurface()->format,
+                        this->surf->format,
                         r,
                         g,
                         b
