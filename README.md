@@ -5,17 +5,4 @@ This library is supposed to have linear learning curve (hence the name), so that
 
 To start working, install the latest release of Linea and SDL, and write `#include <Linea>`
 
-PS: don't use `<iostream>` for input/output, it completely breaks SDL, instead use `<stdio.h>`.
-
-# Math
-
-The Math module has useful classes and functions, for example: Vector3D
-```C++
-math::Vector3D vect = math::Vector3D::fromPolar(10, 0, 0);
-math::Point3D = vect.getPoint();
-printf("%.1f, %.1f, %.1f", point.x, point.y, point.z);
-```
-This code will output `0.0, 0.0, 10.0`.
-
-# Display
-There's some work to do...
+PS: never use `<iostream>`, worst mistake of my life...

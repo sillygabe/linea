@@ -225,6 +225,43 @@ class Color
         }
 };
 
+SDL_Point getSize(SDL_Texture *texture) {
+    SDL_Point size;
+    SDL_QueryTexture(texture, NULL, NULL, &size.x, &size.y);
+    return size;
+}
+
+//Texture object to load images.
+//Can be shown on the screen
+class Texture
+{
+    protected:
+        SDL_Texture* texture;
+    public:
+
+        int getWidth()
+        {
+            SDL_Point size = getSize(this->texture);
+            return size.x;
+        }
+
+        int getHeight()
+        {
+            SDL_Point size = getSize(this->texture);
+            return size.y;
+        }
+
+        Texture(SDL_Texture* texture)
+        {
+            this->texture = texture;
+        }
+
+        SDL_Texture* getSDLTexture()
+        {
+            return this->texture;
+        }
+};
+
 class Window
 {   
     private:
@@ -301,30 +338,23 @@ class Window
             SDL_DestroyRenderer(this->renderer);
             SDL_DestroyWindow(this->win);
         }
-};
 
-//Texture object to load images.
-//Can be shown on the screen
-/*
-class Texture
-{
-    private:
-        SDL_Texture* texture;
-    public:
-
-        Texture()
+        void showImage(Texture texture)
         {
+            //SDL_RenderCopy(
+                //this->renderer,
 
+            //);
+            //TODO
         }
 
-        static Texture loadImage(const char * filename)
+        Texture loadImage(const char * filename)
         {
             SDL_Surface* surf = IMG_Load(filename);
-            
+            Texture ret = SDL_CreateTextureFromSurface(this->renderer, surf);
+            return ret;
         }
-    
 };
-*/
 
 Point2D getMousePos()
 {
