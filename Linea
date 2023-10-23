@@ -303,6 +303,29 @@ class Window
         }
 };
 
+//Texture object to load images.
+//Can be shown on the screen
+/*
+class Texture
+{
+    private:
+        SDL_Texture* texture;
+    public:
+
+        Texture()
+        {
+
+        }
+
+        static Texture loadImage(const char * filename)
+        {
+            SDL_Surface* surf = IMG_Load(filename);
+            
+        }
+    
+};
+*/
+
 Point2D getMousePos()
 {
     int x, y;
