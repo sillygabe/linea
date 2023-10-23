@@ -1,7 +1,317 @@
-#include "math/math.hpp"
-#include "display/display.hpp"
+//Include statements
+#include <SDL2/SDL.h>
+#include <SDL2_image/SDL_image.h>
+#include <SDL2_mixer/SDL_mixer.h>
+#include <cmath>
 
-int LineaInit()
+//Definitions
+#define PI 3.14
+#define LineaQuit SDL_Quit
+
+
+class Point2D 
 {
-    return SDL_Init(SDL_INIT_EVERYTHING);
+    public: 
+        double x;
+        double y;
+        Point2D(double x, double y) 
+        {
+            this->x = x;
+            this->y = y;
+        }
+};
+
+class Vector2D 
+{
+    private:
+        double x; 
+        double y;
+
+    public:
+
+        //Get a point from vector's coordinates
+        Point2D getPoint() 
+        {
+            return Point2D(this->x, this->y);
+        }
+
+        //Constructors
+        Vector2D(double x, double y) 
+        {
+            this->x = x;
+            this->y = y;
+        }
+
+        Vector2D(Point2D point)
+        {
+            this->x = point.x;
+            this->y = point.y;
+        }
+
+        //Class operators
+        Vector2D operator+(Vector2D val) 
+        {
+            return Vector2D
+            (
+                this->x + val.x,
+                this->y + val.y
+            );
+        }
+
+        Vector2D operator-(Vector2D val) 
+        {
+            return Vector2D
+            (
+                this->x - val.x,
+                this->y - val.y
+            );
+        }
+
+        void operator+=(Vector2D val) 
+        {
+            this->x += val.x;
+            this->y += val.y;
+        }
+
+        void operator-=(Vector2D val) 
+        {
+            this->x -= val.x;
+            this->y -= val.y;
+        }
+
+        //Invert the vector
+        void invert() 
+        {
+            this->x *= -1;
+            this->y *= -1;  
+        }
+
+        //Make a vector from given length and degrees
+        static Vector2D fromPolar(double length, double degrees) 
+        {
+            double radians = degrees / 180 * PI;
+            return Vector2D
+            (
+                sin(radians) * length,
+                cos(radians) * length
+            );
+        }
+};
+
+//Transforms degrees into radians
+double toRadians(double degrees) 
+{
+    return degrees * PI / 180;
+}
+
+//Transforms radians into degrees
+double toDegrees(double radians) 
+{
+    return radians / PI * 180;
+}
+
+class Point3D 
+{
+    public:
+        double x;
+        double y;
+        double z;
+
+        Point3D (double x, double y, double z) 
+        {
+            this->x = x;
+            this->y = y;
+            this->z = z;
+        }
+
+};
+
+class Vector3D 
+{
+    private:
+        double x;
+        double y;
+        double z;
+            
+    public:
+
+        Vector3D (double x, double y, double z)
+        {
+            this->x = x;
+            this->y = y;
+            this->z = z;
+        }
+
+        Point3D getPoint() 
+        {
+            return Point3D
+            (
+                this->x,
+                this->y, 
+                this->z
+            );
+        }
+
+        void invert()
+        {
+            this->x *= -1;
+            this->y *= -1;
+            this->z *= -1;
+        }
+
+        Vector3D operator+(Vector3D val)
+        {
+            return Vector3D
+            (
+                this->x + val.x,
+                this->y + val.y,
+                this->z + val.z
+            );
+        }
+
+        Vector3D operator-(Vector3D val)
+        {
+            return Vector3D
+            (
+                this->x - val.x,
+                this->y - val.y,
+                this->z - val.z
+            );
+        }
+
+        void operator+=(Vector3D val)
+        {
+            this->x += val.x;
+            this->y += val.y;
+            this->z += val.z;
+        }
+
+        void operator-=(Vector3D val)
+        {
+            this->x -= val.x;
+            this->y -= val.y;
+            this->z -= val.z;
+        }
+
+        static Vector3D fromPolar(
+            double length,
+            double degreesPan,
+            double degreesTilt
+        )
+        {
+            double radiansPan, radiansTilt;
+            radiansPan = degreesPan * M_PI / 180; 
+            radiansTilt = degreesTilt * M_PI / 180;
+
+            return Vector3D (
+                length * sin(radiansPan) * cos(radiansTilt),
+                length * cos(radiansPan) * sin(radiansTilt),
+                length * cos(radiansTilt)
+            );
+        }
+};
+
+class Color
+{
+    public:
+        int r, g, b, a;
+
+        Color(int r, int g, int b, int a = 255)
+        {
+            this->r = r;
+            this->g = g;
+            this->b = b;
+            this->a = a;
+        }
+};
+
+class Window
+{   
+    private:
+        SDL_Window* win;
+        SDL_Renderer* renderer;
+        SDL_Rect windowRect;
+
+    public:
+
+        Window(
+            const char* title,
+            int width,
+            int height
+        )
+        {
+            this->win = SDL_CreateWindow(
+                title,
+                SDL_WINDOWPOS_CENTERED,
+                SDL_WINDOWPOS_CENTERED,
+                width,
+                height,
+                SDL_WINDOW_SHOWN
+            );
+
+            this->renderer = SDL_CreateRenderer(
+                this->win,
+                -1,
+                SDL_RENDERER_ACCELERATED
+            );
+
+            this->windowRect = {0, 0, width, height};
+        }
+
+        void drawLine(Point2D point1, Point2D point2, Color color)
+        {   
+            SDL_SetRenderDrawColor(
+                this->renderer,
+                color.r,
+                color.g,
+                color.b,
+                color.a
+            );
+            SDL_RenderDrawLine(
+                this->renderer,
+                point1.x,
+                point1.y,
+                point2.x,
+                point2.y
+            );
+        }
+
+        void fill(Color color)
+        {
+            SDL_SetRenderDrawColor(
+                this->renderer,
+                color.r, 
+                color.g, 
+                color.b, 
+                color.a
+            );
+            SDL_RenderFillRect(
+                this->renderer,
+                &this->windowRect
+            );
+        }
+
+        void update()
+        {
+            SDL_RenderPresent(this->renderer);
+            SDL_RenderClear(this->renderer);
+        }
+
+        void destroy()
+        {
+            SDL_DestroyRenderer(this->renderer);
+            SDL_DestroyWindow(this->win);
+        }
+};
+
+Point2D getMousePos()
+{
+    int x, y;
+    SDL_GetMouseState(&x, &y);
+    return Point2D(x, y);
+}
+
+void LineaInit()
+{
+    SDL_Init(SDL_INIT_EVERYTHING);  
 }
