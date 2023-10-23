@@ -233,7 +233,6 @@ class Window
         SDL_Rect windowRect;
 
     public:
-
         Window(
             const char* title,
             int width,
