@@ -11,6 +11,43 @@
 #define LineaQuit SDL_Quit
 #define LineaInit() SDL_Init(SDL_INIT_EVERYTHING)
 
+template <typename T>
+class Array
+{   
+    //A dynamic array, use it instead of vector for maximum compaitiblity
+    private:
+        T* array;
+        size_t used;
+        size_t size;
+    public:
+        //Size is initial size for the array
+        template <typename T>
+        Array(size_t size)
+        {
+            this->array = malloc(size * sizeof(T));
+            this->used = 0; this->size = size;
+        }
+
+        template <typename T>
+        void append(T element)
+        {
+            if (this->size == this->used)
+            {
+                this->size *= 2;
+                this->array = realloc(
+                    this->array, 
+                    this->size * sizeof(T)
+                );
+            }
+            this->array[this->size++] = element;
+        }
+
+        T operator[](t_size index)
+        {
+            return this->array[index];
+        }
+};
+
 //All the 2D math
 
 class Point2D 
