@@ -376,9 +376,43 @@ class Window
             Point2D circlePos, 
             double radius, 
             Color color, 
-            int accuracy = 10
+            int accuracy = 20
         )
         {  
+            int degrees = 360 / accuracy;
+            for (int i = 0; i < accuracy; i++)
+            {
+                if (!(i == accuracy - 1)) 
+                {
+                    drawLine(
+                        getCirclePoint(
+                            circlePos,
+                            radius,
+                            i * degrees
+                        ),
+                        getCirclePoint(
+                            circlePos,
+                            radius, 
+                            (i + 1) * degrees
+                        ),
+                        color
+                    );
+                } else {
+                    drawLine(
+                        getCirclePoint(
+                            circlePos,
+                            radius,
+                            i * degrees
+                        ),
+                        getCirclePoint(
+                            circlePos,
+                            radius, 
+                            0
+                        ),
+                        color
+                    );
+                }
+            }
             
         }
 
