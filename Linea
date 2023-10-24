@@ -1,3 +1,5 @@
+//We live, we love, we SDL...
+
 //Include statements
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
@@ -7,7 +9,9 @@
 //Definitions
 #define PI 3.14
 #define LineaQuit SDL_Quit
+#define LineaInit() SDL_Init(SDL_INIT_EVERYTHING)
 
+//All the 2D math
 
 class Point2D 
 {
@@ -225,43 +229,82 @@ class Color
         }
 };
 
-SDL_Point getSize(SDL_Texture *texture) {
-    SDL_Point size;
-    SDL_QueryTexture(texture, NULL, NULL, &size.x, &size.y);
-    return size;
-}
+class Rect
+{
+    private:
+        SDL_Rect rect; 
+        
+    public:
+
+        Point2D leftPoint = Point2D(0, 0); 
+
+        Rect(
+            int width,
+            int height
+        )
+        {
+            this->rect = {0, 0, width, height};
+        }
+
+        Point2D getCenter()
+        {
+            Point2D retValue = this->leftPoint;
+            retValue.x += rect.w / 2;
+            retValue.y += rect.h / 2;
+            return retValue;
+        }
+
+        void setCenter(Point2D center)
+        {
+            center.x -= this->rect.w / 2;
+            center.y -= this->rect.h / 2;
+            this->leftPoint = center;
+        }
+
+        bool intersectsRect(Rect other)
+        {
+            return SDL_HasIntersection(&this->rect, &other.rect);
+        }
+};
 
 //Texture object to load images.
 //Can be shown on the screen
 class Texture
 {
-    protected:
+    private:
         SDL_Texture* texture;
     public:
 
         int getWidth()
         {
-            SDL_Point size = getSize(this->texture);
-            return size.x;
+            int width;
+            SDL_QueryTexture(this->texture, NULL, NULL, &width, NULL);
+            return width;
         }
 
         int getHeight()
         {
-            SDL_Point size = getSize(this->texture);
-            return size.y;
+            int height;
+            SDL_QueryTexture(this->texture, NULL, NULL, NULL, &height);
+            return height;
+        }
+
+        Rect getRect()
+        {
+            Rect retValue = Rect(
+                this->getWidth(),
+                this->getHeight()
+            );
+            return retValue;
         }
 
         Texture(SDL_Texture* texture)
         {
             this->texture = texture;
         }
-
-        SDL_Texture* getSDLTexture()
-        {
-            return this->texture;
-        }
 };
 
+//TODO: texture rendering
 class Window
 {   
     private:
@@ -351,7 +394,7 @@ class Window
         Texture loadImage(const char * filename)
         {
             SDL_Surface* surf = IMG_Load(filename);
-            Texture ret = SDL_CreateTextureFromSurface(this->renderer, surf);
+            Texture ret = Texture(SDL_CreateTextureFromSurface(this->renderer, surf));
             return ret;
         }
 };
@@ -363,7 +406,5 @@ Point2D getMousePos()
     return Point2D(x, y);
 }
 
-void LineaInit()
-{
-    SDL_Init(SDL_INIT_EVERYTHING);  
-}
+//Please, if someone reads this, add the `new` method to all classes
+//My mind is dying hehehaw
