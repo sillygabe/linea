@@ -4,5 +4,3 @@ This is a C++ library built on top of [SDL](https://github.com/libsdl-org/SDL) t
 This library is supposed to have linear learning curve (hence the name), so that you don't go insane from having to learn 1000 different modules and plugins with next to zero documentation.
 
 To start working, install the latest release of Linea and SDL, and write `#include <Linea>`
-
-PS: never use `<iostream>`, worst mistake of my life...
