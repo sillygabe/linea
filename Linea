@@ -114,6 +114,21 @@ double toDegrees(double radians)
     return radians / PI * 180;
 }
 
+//A really silly function for getting a point on a circle
+Point2D getCirclePoint
+(
+    Point2D centerPoint,
+    double radius,
+    double degrees
+)
+{
+    double radians = degrees / 180 * PI;
+    return Point2D(
+        sin(radians) * radius + centerPoint.x,
+        cos(radians) * radius + centerPoint.y
+    );
+}
+
 class Point3D 
 {
     public:
@@ -353,6 +368,18 @@ class Window
                 point2.x,
                 point2.y
             );
+        }
+        
+        //TODO: make a system for drawing circles
+        //Preferably use switch
+        void drawCircle(
+            Point2D circlePos, 
+            double radius, 
+            Color color, 
+            int accuracy = 10
+        )
+        {  
+            
         }
 
         void fill(Color color)
