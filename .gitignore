@@ -1,5 +1,2 @@
 .vscode
-tests.cpp
 main
-run.sh
-tests.c

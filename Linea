@@ -9,10 +9,15 @@
 //Definitions
 #define PI 3.14
 #define LineaQuit SDL_Quit
-#define LineaInit() SDL_Init(SDL_INIT_EVERYTHING)
+
+void LineaInit()
+{
+    SDL_Init(SDL_INIT_EVERYTHING);
+    IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG | IMG_INIT_AVIF | IMG_INIT_WEBP);
+    Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG);
+}
 
 //All the 2D math
-
 class Point2D 
 {
     public: 
@@ -280,6 +285,11 @@ class Rect
         {
             return SDL_HasIntersection(&this->rect, &other.rect);
         }
+
+        SDL_Rect* getSDLRect()
+        {
+            return &this->rect;
+        }
 };
 
 //Texture object to load images.
@@ -317,9 +327,13 @@ class Texture
         {
             this->texture = texture;
         }
+
+        SDL_Texture* getSDLTexture()
+        {
+            return this->texture;
+        }
 };
 
-//TODO: texture rendering
 class Window
 {   
     private:
@@ -370,8 +384,6 @@ class Window
             );
         }
         
-        //TODO: make a system for drawing circles
-        //Preferably use switch
         void drawCircle(
             Point2D circlePos, 
             double radius, 
@@ -443,13 +455,14 @@ class Window
             SDL_DestroyWindow(this->win);
         }
 
-        void showImage(Texture texture)
+        void showImage(Texture texture, Rect blitRect)
         {
-            //SDL_RenderCopy(
-                //this->renderer,
-
-            //);
-            //TODO
+            SDL_RenderCopy(
+                this->renderer,
+                texture.getSDLTexture(),
+                NULL,
+                blitRect.getSDLRect()
+            );
         }
 
         Texture loadImage(const char * filename)
