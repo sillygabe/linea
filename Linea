@@ -296,6 +296,16 @@ class Rect
             return SDL_HasIntersection(&this->rect, &other.rect);
         }
 
+        bool intersectsPoint(Point2D point)
+        {
+            SDL_Rect rect;
+            rect.x = point.x;
+            rect.y = point.y;
+            rect.h = rect.w = 1;
+
+            return SDL_HasIntersection(&rect, &this->rect);
+        }
+
         SDL_Rect* getSDLRect()
         {
             return &this->rect;
