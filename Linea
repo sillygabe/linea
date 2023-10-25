@@ -28,6 +28,16 @@ class Point2D
             this->x = x;
             this->y = y;
         }
+
+        SDL_Vertex toSDLVertex(int r, int g, int b)
+        {
+            SDL_Vertex point = {
+                {(float) this->x, (float) this->y},
+                {(unsigned char) r, (unsigned char) g, (unsigned char) b, 0xFF},
+                {0.1f, 0.1f}
+            };
+            return point;
+        }
 };
 
 class Vector2D 
@@ -426,6 +436,28 @@ class Window
                 }
             }
             
+        }
+
+        void drawTriangle(
+            Point2D point1,
+            Point2D point2,
+            Point2D point3
+        )
+        {
+            SDL_Vertex points[3] = {
+                point1.toSDLVertex(0, 0, 0), 
+                point2.toSDLVertex(0, 0, 0), 
+                point3.toSDLVertex(0, 0, 0)
+            };
+            SDL_RenderGeometry(
+                this->renderer,
+                NULL,
+                points,
+                3,
+                NULL,
+                3
+            );
+
         }
 
         void fill(Color color)

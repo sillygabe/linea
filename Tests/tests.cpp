@@ -4,23 +4,23 @@ int main()
 {
     LineaInit();
 
-    SDL_ShowCursor(SDL_DISABLE);
-
-    Window window = Window("Hello, linea! :3", 201, 251);
+    Window window = Window("Hello, linea! :3", 640, 480);
     Color Background = Color(0, 34, 45);
-
-    Texture mewo = Texture(window.loadImage("mewo.jpeg"));
-    Rect mewo_rect = mewo.getRect();
+    Color Line = Color(255, 255, 255);
 
     bool running = true; SDL_Event event;
 
+    Point2D center = Point2D(320, 240);
+    Point2D mousePos = Point2D(0, 0);
+
     while (running)
     {   
-        mewo_rect.setCenter(getMousePos());
+        mousePos = getMousePos();
 
         window.fill(Background);
 
-        window.showImage(mewo, mewo_rect);
+        window.drawLine(center, mousePos, Line);
+        window.drawCircle(mousePos, 50, Line, 360);
 
         window.update();
 
