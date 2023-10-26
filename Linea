@@ -482,6 +482,28 @@ class Window
             );
 
         }
+        void drawQuadrilateral(
+            Point2D point1,
+            Point2D point2,
+            Point2D point3,
+            Point2D point4,
+            Color color
+        )
+        {
+            SDL_Vertex points[4] = {
+                point1.toSDLVertex(color.r, color.g, color.b), 
+                point2.toSDLVertex(color.r, color.g, color.b), 
+                point3.toSDLVertex(color.r, color.g, color.b)
+            };
+            SDL_RenderGeometry(
+                this->renderer,
+                NULL,
+                points,
+                4,
+                NULL,
+                4
+            );
+        }
 
         void fill(Color color)
         {
