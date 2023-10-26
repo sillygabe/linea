@@ -6,6 +6,7 @@
 #include <SDL2_mixer/SDL_mixer.h>
 #include <SDL2_ttf/SDL_ttf.h>
 #include <cmath>
+#include <stdio.h>
 
 //Definitions
 #define PI 3.14
@@ -33,9 +34,9 @@ class Point2D
         SDL_Vertex toSDLVertex(int r, int g, int b)
         {
             SDL_Vertex point = {
-                {(float) this->x, (float) this->y},
-                {(unsigned char) r, (unsigned char) g, (unsigned char) b, 0xFF},
-                {0.1f, 0.1f}
+                SDL_FPoint{(float) this->x, (float) this->y},
+                SDL_Color{(unsigned char) r, (unsigned char) g, (unsigned char) b, 0xFF},
+                SDL_FPoint{0}
             };
             return point;
         }
@@ -540,6 +541,7 @@ class Window
                 NULL,
                 blitRect.getSDLRect()
             );
+            printf(SDL_GetError());
         }
 
         Texture loadImage(const char * filename)
