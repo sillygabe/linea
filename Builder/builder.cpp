@@ -55,6 +55,29 @@ int main(int argc, char *argv[])
         main << "   return 0;\n";
         main << "\n}";
         main.close();
+    } 
+    else if (command == "info")
+    {
+        if (argc < 3)
+        {
+            cout << "Please provide a valid directory to get info on." << endl;
+            return 0;
+        }
+        string directory = argv[2];
+        
+        //Someone please finish this command
+        //info is supposed to give you information about a directory
+    }
+    else if (command == "build")
+    {
+        //Will do that command after finishing the main part of the library
+        //build is supposed to build an executable from a directory
+        //We are gonna use docker to build executables for several platforms
+    } 
+    else
+    {
+        cout << "Please provide a valid command." << endl;
+        return 0;
     }
 
     return 0;
