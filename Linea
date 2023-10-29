@@ -6,7 +6,6 @@
 #include <SDL2_mixer/SDL_mixer.h>
 #include <SDL2_ttf/SDL_ttf.h>
 #include <cmath>
-#include <stdio.h>
 
 //Definitions
 #define PI 3.14
@@ -541,7 +540,6 @@ class Window
                 NULL,
                 blitRect.getSDLRect()
             );
-            printf(SDL_GetError());
         }
 
         Texture loadImage(const char * filename)
