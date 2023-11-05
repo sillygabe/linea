@@ -313,6 +313,8 @@ class Rect
         }
 };
 
+//TODO: Fix this class
+//like fr it sucks :skull:
 class Font
 {
     private:
@@ -327,6 +329,8 @@ class Font
 
 //Texture object to load images.
 //Can be shown on the screen
+
+//TODO: Fix a bug with rendering a texture
 class Texture
 {
     private:
