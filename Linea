@@ -300,8 +300,8 @@ class Rect
         bool intersectsPoint(Point2D point)
         {
             SDL_Rect rect;
-            rect.x = point.x;
-            rect.y = point.y;
+            rect.x = (int) point.x;
+            rect.y = (int) point.y;
             rect.h = rect.w = 1;
 
             return SDL_HasIntersection(&rect, &this->rect);
@@ -334,7 +334,7 @@ class Font
 class Texture
 {
     private:
-        SDL_Texture* texture;
+        SDL_Texture* texture = nullptr;
     public:
 
         int getWidth()
